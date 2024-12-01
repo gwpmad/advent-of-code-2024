@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "run_day.py",
+      "args": ["${input:dayNumber}"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "dayNumber",
+      "description": "Day number?",
+      "default": "1"
+    }
+  ]
+}
