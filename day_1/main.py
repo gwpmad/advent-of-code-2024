@@ -23,26 +23,22 @@ def solution_1(values: str) -> int:
 
 def solution_2(string: str) -> int:
     step_size = string.find("\n") + 1
-    state = {
-        "R": defaultdict(int),
-        "L": defaultdict(int),
-        "total": 0,
-    }
+    left_counts, right_counts, total = defaultdict(int), defaultdict(int), 0
     for i in range(0, len(string), step_size):
         substring = string[i : i + step_size]
         left_digit, right_digit = list(map(int, substring.split()))
 
-        state["L"][left_digit] += 1
-        if state["R"][left_digit]:
-            state["total"] += get_addition_to_subtotal(
-                left_digit, state["L"][left_digit], state["R"][left_digit]
+        left_counts[left_digit] += 1
+        if right_counts[left_digit]:
+            total += get_addition_to_subtotal(
+                left_digit, left_counts[left_digit], right_counts[left_digit]
             )
-        state["R"][right_digit] += 1
-        if state["L"][right_digit]:
-            state["total"] += get_addition_to_subtotal(
-                right_digit, state["R"][right_digit], state["L"][right_digit]
+        right_counts[right_digit] += 1
+        if left_counts[right_digit]:
+            total += get_addition_to_subtotal(
+                right_digit, right_counts[right_digit], left_counts[right_digit]
             )
-    return state["total"]
+    return total
 
 
 def get_addition_to_subtotal(
