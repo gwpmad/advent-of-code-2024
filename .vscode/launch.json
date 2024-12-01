@@ -2,11 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Current File",
+      "name": "Python: Run Specific Day",
       "type": "debugpy",
       "request": "launch",
       "program": "run_day.py",
-      "args": ["${input:dayNumber}"],
+      "args": [
+        "${input:dayNumber}"
+      ],
       "console": "integratedTerminal",
       "justMyCode": true
     }
