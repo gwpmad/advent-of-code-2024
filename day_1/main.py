@@ -14,12 +14,7 @@ def solution_1(values: list[str]) -> int:
     right_list.sort()
 
     return reduce(
-        lambda acc, idx_value: acc
-        + (
-            right_list[idx_value[0]] - idx_value[1]
-            if right_list[idx_value[0]] > idx_value[1]
-            else idx_value[1] - right_list[idx_value[0]]
-        ),
+        lambda acc, idx_value: acc + (abs(right_list[idx_value[0]] - idx_value[1])),
         enumerate(left_list),
         0,
     )
