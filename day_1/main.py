@@ -29,24 +29,11 @@ def solution_2(string: str) -> int:
         left_digit, right_digit = list(map(int, substring.split()))
 
         left_counts[left_digit] += 1
-        if right_counts[left_digit]:
-            total += get_addition_to_subtotal(
-                left_digit, left_counts[left_digit], right_counts[left_digit]
-            )
+        total += left_digit * right_counts[left_digit]
+
         right_counts[right_digit] += 1
-        if left_counts[right_digit]:
-            total += get_addition_to_subtotal(
-                right_digit, right_counts[right_digit], left_counts[right_digit]
-            )
+        total += right_digit * left_counts[right_digit]
     return total
-
-
-def get_addition_to_subtotal(
-    digit: int, current_col_digit_count: int, opposite_col_digit_count: int
-) -> int:
-    return (current_col_digit_count * opposite_col_digit_count * digit) - (
-        (current_col_digit_count - 1) * opposite_col_digit_count * digit
-    )
 
 
 def get_int_lists(values: list[str]) -> tuple[list[int], list[int]]:
