@@ -7,7 +7,7 @@ def solution(values=open_file("2").split("\n")):
     return (solution_1(values), solution_2(values))
 
 
-def solution_1(reports: list[str]):
+def solution_1(reports: list[str]) -> int:
     result = 0
     for report in reports:
         numbers = [*map(int, report.split())]
@@ -18,24 +18,21 @@ def solution_1(reports: list[str]):
     return result
 
 
-def solution_2(reports: list[str]):
+def solution_2(reports: list[str]) -> int:
     result = 0
     for report in reports:
         numbers = [*map(int, report.split())]
         failed_idx = find_failed_idx(numbers)
-        if not isinstance(failed_idx, int):
-            result += 1
-            continue
-
-        retry_1 = [n for i, n in enumerate(numbers) if i != failed_idx]
-        retry_2 = [n for i, n in enumerate(numbers) if i != failed_idx + 1]
-        retry_3 = [n for i, n in enumerate(numbers) if i != failed_idx - 1]
-        if (
-            not isinstance(find_failed_idx(retry_1), int)
-            or not isinstance(find_failed_idx(retry_2), int)
-            or not isinstance(find_failed_idx(retry_3), int)
+        if isinstance(failed_idx, int) and all(
+            isinstance(find_failed_idx(retry), int)
+            for retry in [
+                [n for i, n in enumerate(numbers) if i != failed_idx],
+                [n for i, n in enumerate(numbers) if i != failed_idx + 1],
+                [n for i, n in enumerate(numbers) if i != failed_idx - 1],
+            ]
         ):
-            result += 1
+            continue
+        result += 1
     return result
 
 
