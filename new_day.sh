@@ -8,9 +8,7 @@ echo "from utils import open_file
 
 
 def solution(values = open_file(\"$1\").split(\"\\n\")):
-    solution_1 = solution_1(values)
-    solution_2 = solution_2(values)
-    return (solution_1, solution_2)
+    return (solution_1(values), solution_2(values))
 
 
 def solution_1(values: list[str]):
