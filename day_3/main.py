@@ -21,7 +21,7 @@ def solution_2(value: str) -> int:
 
 def sum_enabled_muls(acc, op):
     if op[0] == "d":
-        acc["do"] = True if op == "do()" else False
+        acc["do"] = op == "do()"
     elif acc["do"]:
         acc["sum"] += prod(map(int, op.split(",")))
     return acc
