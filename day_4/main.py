@@ -11,7 +11,7 @@ def solution(values=open_file("4").split("\n")):
     return (solution_1(values), solution_2(values))
 
 
-def solution_1(horizontals: list[str]):
+def solution_1(horizontals: list[str]) -> int:
     verticals = transpose_matrix(horizontals)
     diagonals = get_both_diagonals(verticals)
     return reduce(
@@ -21,7 +21,7 @@ def solution_1(horizontals: list[str]):
     )
 
 
-def solution_2(lines: list[str]):
+def solution_2(lines: list[str]) -> int:
     total = 0
     for i in range(1, len(lines) - 1):
         a_idx = 1
