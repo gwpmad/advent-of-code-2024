@@ -6,9 +6,7 @@ from utils import open_file
 
 
 def solution(values=open_file("5").split("\n\n")):
-    updates = list(
-        map(lambda update: list(map(int, update.split(","))), values[1].split("\n"))
-    )
+    updates = list(map(lambda update: update.split(","), values[1].split("\n")))
     lookup = reduce(_create_precedence_lookup, values[0].split("\n"), defaultdict(set))
 
     solution_1 = 0
@@ -24,15 +22,15 @@ def solution(values=open_file("5").split("\n\n")):
 
 
 def _create_precedence_lookup(
-    lookup: defaultdict[int, set], entry: str
-) -> defaultdict[int, set]:
-    former, latter = list(map(int, entry.split("|")))
+    lookup: defaultdict[str, set], entry: str
+) -> defaultdict[str, set]:
+    former, latter = entry.split("|")
     lookup[former].add(latter)
     return lookup
 
 
-def _get_comparator(lookup: defaultdict[int, set]) -> Callable[[int, int], int]:
-    def compare_by_precedence(a: int, b: int):
+def _get_comparator(lookup: defaultdict[str, set]) -> Callable[[str, str], int]:
+    def compare_by_precedence(a: str, b: str):
         if b in lookup[a]:
             return -1
         return 1 if a in lookup[b] else 0
@@ -40,8 +38,8 @@ def _get_comparator(lookup: defaultdict[int, set]) -> Callable[[int, int], int]:
     return compare_by_precedence
 
 
-def _middle_entry(update: list[int]) -> int:
-    return update[int(len(update) / 2)]
+def _middle_entry(update: list[str]) -> int:
+    return int(update[len(update) // 2])
 
 
 test_config = {
